@@ -1,6 +1,8 @@
 import { useState, useMemo } from 'react';
 import { allProductsFull as allProducts } from '../data/instruments.js';
 import ProductCard from './ProductCard.jsx';
+import { Tag, Trophy } from 'lucide-react';
+import AppIcon from './AppIcon.jsx';
 
 export default function Offers({ onAddToCart }) {
   const [sortBy, setSortBy] = useState('discount');
@@ -32,7 +34,7 @@ export default function Offers({ onAddToCart }) {
   return (
     <section className="offers-section">
       <div className="section-header">
-        <h2 className="section-title">🔥 Ofertas Especiales</h2>
+        <h2 className="section-title"><Tag size={24} /> Ofertas Especiales</h2>
         <p className="section-subtitle">
           {offers.length} productos en oferta — Ahorra hasta ${Math.max(...offers.map(p => p.savings)).toLocaleString('es-MX')} MXN
         </p>
@@ -67,12 +69,12 @@ export default function Offers({ onAddToCart }) {
 
       {/* Top 3 highlight */}
       <div className="top-offers">
-        <h3 className="subsection-title">⚡ Top 3 Mejores Descuentos</h3>
+        <h3 className="subsection-title"><Trophy size={20} /> Top 3 Mejores Descuentos</h3>
         <div className="top-offers-grid">
           {offers.slice(0, 3).map((product, i) => (
             <div key={product.id} className={`top-offer-card rank-${i + 1}`}>
-              <div className="rank-badge">{['🥇', '🥈', '🥉'][i]}</div>
-              <div className="top-offer-emoji">{getEmoji(product.category)}</div>
+              <div className="rank-badge"><Trophy size={24} /></div>
+              <div className="top-offer-emoji"><AppIcon category={product.category} size={42} /></div>
               <div className="top-offer-info">
                 <span className="product-category">{product.category}</span>
                 <h4>{product.name}</h4>
@@ -115,17 +117,3 @@ export default function Offers({ onAddToCart }) {
   );
 }
 
-function getEmoji(category) {
-  if (category.includes('Guitarra') || category.includes('Bajo')) return '🎸';
-  if (category.includes('Piano') || category.includes('Teclado') || category.includes('Sintetizador')) return '🎹';
-  if (category.includes('Batería') || category.includes('Percusión') || category.includes('Platillos')) return '🥁';
-  if (category.includes('Saxofón') || category.includes('Clarinete')) return '🎷';
-  if (category.includes('Trompeta') || category.includes('Trombón')) return '🎺';
-  if (category.includes('Flauta')) return '🪈';
-  if (category.includes('Violín') || category.includes('Cello') || category.includes('Contrabajo')) return '🎻';
-  if (category.includes('Micrófono')) return '🎤';
-  if (category.includes('Audífono')) return '🎧';
-  if (category.includes('Pedal') || category.includes('Pedalera')) return '🎚️';
-  if (category.includes('Amplificador')) return '🔊';
-  return '🎵';
-}

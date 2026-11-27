@@ -78,7 +78,7 @@ body {
   gap: 8px;
   margin-right: auto;
 }
-.brand-icon { font-size: 1.8rem; }
+.brand-icon { display: inline-flex; align-items: center; font-size: 1.8rem; }
 .brand-text {
   font-size: 1.3rem;
   font-weight: 700;
@@ -105,6 +105,15 @@ body {
   font-weight: 500;
   transition: all var(--transition);
   white-space: nowrap;
+}
+.nav-btn, .footer-link, .hero-badge, .hero-cta button,
+.section-title, .subsection-title, .btn-cart, .btn-primary,
+.btn-secondary, .quiz-feature, .quiz-nav button,
+.result-crown, .result-section h4, .store-zone, .store-actions a,
+.review-product span, .helpful-count, .btn-helpful {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 .nav-btn:hover { background: var(--surface); color: var(--text); }
 .nav-btn.active { background: var(--primary); color: white; }

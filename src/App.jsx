@@ -9,6 +9,7 @@ import StoresSection from './components/StoresSection.jsx';
 import ReviewsSection from './components/ReviewsSection.jsx';
 import Quiz from './components/Quiz.jsx';
 import Cart from './components/Cart.jsx';
+import { Guitar, MapPin, Music, Star, Tag, Target } from 'lucide-react';
 
 export default function App() {
   const [section, setSection] = useState('home');
@@ -68,29 +69,29 @@ export default function App() {
       <footer className="app-footer">
         <div className="footer-grid">
           <div className="footer-brand">
-            <span className="brand-icon">🎸</span>
+            <span className="brand-icon"><Guitar size={28} aria-hidden="true" /></span>
             <strong>GuitarHeaven</strong>
             <p>El mayor catálogo musical de Jalisco</p>
           </div>
           <div className="footer-links">
             <strong>Secciones</strong>
             {[
-              ['catalog', '🎸 Catálogo'],
-              ['offers', '🔥 Ofertas'],
-              ['accessories', '🎵 Accesorios'],
-              ['stores', '📍 Tiendas GDL'],
-              ['reviews', '⭐ Reseñas'],
-              ['quiz', '🎯 Quiz'],
-            ].map(([id, label]) => (
-              <button key={id} className="footer-link" onClick={() => navigate(id)}>{label}</button>
+              ['catalog', 'Catálogo', Guitar],
+              ['offers', 'Ofertas', Tag],
+              ['accessories', 'Accesorios', Music],
+              ['stores', 'Tiendas GDL', MapPin],
+              ['reviews', 'Reseñas', Star],
+              ['quiz', 'Quiz', Target],
+            ].map(([id, label, Icon]) => (
+              <button key={id} className="footer-link" onClick={() => navigate(id)}><Icon size={16} /> {label}</button>
             ))}
           </div>
           <div className="footer-info">
             <strong>Información</strong>
-            <p>📍 Guadalajara, Jalisco, México</p>
-            <p>🎵 1,000+ productos catalogados</p>
-            <p>🏪 15 tiendas físicas listadas</p>
-            <p>⭐ Reseñas verificadas</p>
+            <p><MapPin size={16} /> Guadalajara, Jalisco, México</p>
+            <p><Music size={16} /> 1,000+ productos catalogados</p>
+            <p><MapPin size={16} /> 15 tiendas físicas listadas</p>
+            <p><Star size={16} /> Reseñas verificadas</p>
           </div>
         </div>
         <div className="footer-bottom">

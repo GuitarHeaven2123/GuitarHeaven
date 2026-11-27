@@ -66,7 +66,7 @@ export default function Cart({ items, onRemove, onClose, onClearCart }) {
       <div className="cart-panel" onClick={e => e.stopPropagation()}>
         <div className="cart-header">
           <h3>🛒 Tu carrito</h3>
-          <button className="cart-close" onClick={onClose}>✕</button>
+          <button className="cart-close" onClick={onClose} aria-label="Cerrar carrito">✕</button>
         </div>
 
         {items.length === 0 ? (
@@ -94,7 +94,7 @@ export default function Cart({ items, onRemove, onClose, onClearCart }) {
                         )}
                       </div>
                     </div>
-                    <button className="cart-remove" onClick={() => onRemove(item.id)}>✕</button>
+                    <button className="cart-remove" onClick={() => onRemove(item.id)} aria-label="Eliminar producto">✕</button>
                   </div>
 
                   <WhereToBuy product={item} />

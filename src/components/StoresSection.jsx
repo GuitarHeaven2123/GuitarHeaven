@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { storesGDL } from '../data/stores.js';
+import { ChevronDown, ChevronUp, Clock3, Globe, Map, MapPin, Phone, Search, Store, X } from 'lucide-react';
 
 const zones = ['Todas', ...new Set(storesGDL.map(s => s.zone))];
 
@@ -31,13 +32,13 @@ export default function StoresSection() {
   return (
     <section className="stores-section">
       <div className="section-header">
-        <h2 className="section-title">📍 Tiendas en Guadalajara</h2>
+        <h2 className="section-title"><MapPin size={24} /> Tiendas en Guadalajara</h2>
         <p className="section-subtitle">Encuentra las mejores tiendas de música en la zona metropolitana de GDL</p>
       </div>
 
       {/* Map placeholder */}
       <div className="map-banner">
-        <span className="map-icon">🗺️</span>
+        <span className="map-icon"><Map size={40} /></span>
         <div>
           <strong>Guadalajara & Área Metropolitana</strong>
           <p>Zapopan · Tlaquepaque · Tonalá · Centro GDL</p>
@@ -48,7 +49,7 @@ export default function StoresSection() {
       {/* Filters */}
       <div className="stores-controls">
         <div className="search-bar">
-          <span className="search-icon">🔍</span>
+          <span className="search-icon"><Search size={18} /></span>
           <input
             type="text"
             placeholder="Buscar tienda o especialidad..."
@@ -56,7 +57,7 @@ export default function StoresSection() {
             onChange={e => setSearch(e.target.value)}
             className="search-input"
           />
-          {search && <button className="search-clear" onClick={() => setSearch('')}>✕</button>}
+          {search && <button className="search-clear" onClick={() => setSearch('')} aria-label="Limpiar búsqueda"><X size={16} /></button>}
         </div>
 
         <div className="zone-chips">
@@ -66,7 +67,7 @@ export default function StoresSection() {
               className={`chip ${selectedZone === zone ? 'active' : ''}`}
               onClick={() => setSelectedZone(zone)}
             >
-              {zone === 'Todas' ? '📍 Todas las zonas' : `📌 ${zone}`}
+              {zone === 'Todas' ? <><MapPin size={15} /> Todas las zonas</> : <><MapPin size={15} /> {zone}</>}
             </button>
           ))}
         </div>
@@ -80,14 +81,14 @@ export default function StoresSection() {
             className={`store-card ${expanded === store.id ? 'expanded' : ''}`}
           >
             <div className="store-header" onClick={() => setExpanded(expanded === store.id ? null : store.id)}>
-              <div className="store-icon">🏪</div>
+              <div className="store-icon"><Store size={40} /></div>
               <div className="store-basic">
                 <h3 className="store-name">{store.name}</h3>
-                <span className="store-zone">📌 {store.zone}</span>
+                <span className="store-zone"><MapPin size={14} /> {store.zone}</span>
                 <StarRow rating={store.rating} />
                 <span className="store-reviews-count">({store.reviews} reseñas)</span>
               </div>
-              <div className="store-toggle">{expanded === store.id ? '▲' : '▼'}</div>
+              <div className="store-toggle">{expanded === store.id ? <ChevronUp size={18} /> : <ChevronDown size={18} />}</div>
             </div>
 
             {expanded === store.id && (
@@ -96,21 +97,21 @@ export default function StoresSection() {
 
                 <div className="store-info-grid">
                   <div className="info-item">
-                    <span className="info-icon">📍</span>
+                    <span className="info-icon"><MapPin size={18} /></span>
                     <div>
                       <strong>Dirección</strong>
                       <p>{store.address}</p>
                     </div>
                   </div>
                   <div className="info-item">
-                    <span className="info-icon">📞</span>
+                    <span className="info-icon"><Phone size={18} /></span>
                     <div>
                       <strong>Teléfono</strong>
                       <p>{store.phone}</p>
                     </div>
                   </div>
                   <div className="info-item">
-                    <span className="info-icon">🕐</span>
+                    <span className="info-icon"><Clock3 size={18} /></span>
                     <div>
                       <strong>Horario</strong>
                       <p>{store.schedule}</p>
@@ -118,7 +119,7 @@ export default function StoresSection() {
                   </div>
                   {store.website && (
                     <div className="info-item">
-                      <span className="info-icon">🌐</span>
+                      <span className="info-icon"><Globe size={18} /></span>
                       <div>
                         <strong>Sitio Web</strong>
                         <p>
@@ -153,7 +154,7 @@ export default function StoresSection() {
                     rel="noreferrer"
                     className="btn-maps"
                   >
-                    🗺️ Ver en Google Maps
+                    <Map size={16} /> Ver en Google Maps
                   </a>
                   {store.website && (
                     <a
@@ -162,7 +163,7 @@ export default function StoresSection() {
                       rel="noreferrer"
                       className="btn-website"
                     >
-                      🌐 Visitar Sitio Web
+                      <Globe size={16} /> Visitar Sitio Web
                     </a>
                   )}
                 </div>
@@ -174,7 +175,7 @@ export default function StoresSection() {
 
       {filtered.length === 0 && (
         <div className="no-results">
-          <span className="no-results-icon">🏪</span>
+          <span className="no-results-icon"><Store size={48} /></span>
           <p>No se encontraron tiendas con tu búsqueda.</p>
           <button className="btn-secondary" onClick={() => { setSearch(''); setSelectedZone('Todas'); }}>
             Ver todas las tiendas

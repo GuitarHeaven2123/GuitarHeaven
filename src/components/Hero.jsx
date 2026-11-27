@@ -1,4 +1,6 @@
 import { allProductsFull } from '../data/instruments.js';
+import { Guitar, Target, Music } from 'lucide-react';
+import AppIcon from './AppIcon.jsx';
 
 export default function Hero({ onNavigate }) {
   const stats = [
@@ -17,7 +19,7 @@ export default function Hero({ onNavigate }) {
       </div>
 
       <div className="hero-content">
-        <div className="hero-badge">🎵 El mayor catálogo musical de Jalisco</div>
+        <div className="hero-badge"><Music size={18} /> El mayor catálogo musical de Jalisco</div>
         <h1 className="hero-title">
           Tu universo musical<br />
           <span className="gradient-text">comienza aquí</span>
@@ -29,10 +31,10 @@ export default function Hero({ onNavigate }) {
 
         <div className="hero-cta">
           <button className="btn-primary" onClick={() => onNavigate('catalog')}>
-            🎸 Explorar Catálogo
+            <Guitar size={18} /> Explorar Catálogo
           </button>
           <button className="btn-secondary" onClick={() => onNavigate('quiz')}>
-            🎯 ¿Qué instrumento soy?
+            <Target size={18} /> ¿Qué instrumento soy?
           </button>
         </div>
 
@@ -47,7 +49,7 @@ export default function Hero({ onNavigate }) {
       </div>
 
       <div className="hero-instruments">
-        {['🎸', '🎹', '🥁', '🎺', '🎻', '🎷', '🎵', '🪗', '🪘', '🎤'].map((emoji, i) => (
+        {['Guitarra', 'Piano', 'Batería', 'Trompeta', 'Violín', 'Saxofón', 'Música', 'Arpa', 'Percusión', 'Micrófono'].map((category, i) => (
           <div
             key={i}
             className="floating-instrument"
@@ -57,7 +59,7 @@ export default function Hero({ onNavigate }) {
               top: `${20 + (i % 3) * 25}%`,
             }}
           >
-            {emoji}
+            <AppIcon category={category} size={28} />
           </div>
         ))}
       </div>

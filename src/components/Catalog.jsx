@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { allProductsFull as allProducts, categories } from '../data/instruments.js';
 import ProductCard from './ProductCard.jsx';
+import { ChevronDown, ChevronUp, Search, SlidersHorizontal, X } from 'lucide-react';
 
 const ITEMS_PER_PAGE = 24;
 
@@ -72,13 +73,13 @@ export default function Catalog({ onAddToCart }) {
   return (
     <section className="catalog-section">
       <div className="section-header">
-        <h2 className="section-title">🎸 Catálogo Completo</h2>
+        <h2 className="section-title"><SlidersHorizontal size={24} /> Catálogo Completo</h2>
         <p className="section-subtitle">{allProducts.length} productos disponibles</p>
       </div>
 
       {/* Search bar */}
       <div className="search-bar">
-        <span className="search-icon">🔍</span>
+        <span className="search-icon"><Search size={18} /></span>
         <input
           type="text"
           placeholder="Buscar instrumentos, marcas, accesorios..."
@@ -87,14 +88,14 @@ export default function Catalog({ onAddToCart }) {
           className="search-input"
         />
         {search && (
-          <button className="search-clear" onClick={() => { setSearch(''); setPage(1); }}>✕</button>
+          <button className="search-clear" onClick={() => { setSearch(''); setPage(1); }} aria-label="Limpiar búsqueda"><X size={16} /></button>
         )}
       </div>
 
       {/* Controls row */}
       <div className="controls-row">
         <button className="btn-filter-toggle" onClick={() => setShowFilters(!showFilters)}>
-          🎛️ Filtros {showFilters ? '▲' : '▼'}
+          <SlidersHorizontal size={16} /> Filtros {showFilters ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
         </button>
         <select className="sort-select" value={sortBy} onChange={handleSort}>
           {sortOptions.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
@@ -149,7 +150,7 @@ export default function Catalog({ onAddToCart }) {
       {/* Grid */}
       {paged.length === 0 ? (
         <div className="no-results">
-          <span className="no-results-icon">🔍</span>
+          <span className="no-results-icon"><Search size={48} /></span>
           <p>No se encontraron productos para tu búsqueda.</p>
           <button className="btn-secondary" onClick={() => { setSearch(''); setSelectedCategory('Todos'); setPage(1); }}>
             Ver todos

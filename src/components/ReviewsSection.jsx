@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { userReviews } from '../data/reviews.js';
+import { CheckCircle2, Edit3, Guitar, Star, ThumbsUp, X } from 'lucide-react';
 
 function StarRow({ rating, interactive = false, onRate }) {
   const [hover, setHover] = useState(0);
@@ -102,13 +103,13 @@ export default function ReviewsSection() {
   return (
     <section className="reviews-section">
       <div className="section-header">
-        <h2 className="section-title">⭐ Reseñas de la Comunidad</h2>
+        <h2 className="section-title"><Star size={24} /> Reseñas de la Comunidad</h2>
         <p className="section-subtitle">Lo que dicen los músicos sobre sus instrumentos favoritos</p>
       </div>
 
       {submitted && (
         <div className="success-banner">
-          ✅ ¡Tu reseña fue publicada exitosamente! Gracias por compartir tu experiencia.
+          <CheckCircle2 size={18} /> ¡Tu reseña fue publicada exitosamente! Gracias por compartir tu experiencia.
         </div>
       )}
 
@@ -155,7 +156,7 @@ export default function ReviewsSection() {
         </div>
 
         <button className="btn-primary" onClick={() => setShowForm(!showForm)}>
-          {showForm ? '✕ Cancelar' : '✏️ Escribir reseña'}
+          {showForm ? <><X size={16} /> Cancelar</> : <><Edit3 size={16} /> Escribir reseña</>}
         </button>
       </div>
 
@@ -246,7 +247,7 @@ export default function ReviewsSection() {
             </div>
 
             <div className="review-product">
-              <span>🎸 {review.productName}</span>
+              <span><Guitar size={16} /> {review.productName}</span>
             </div>
 
             <h4 className="review-title">"{review.title}"</h4>
@@ -261,7 +262,7 @@ export default function ReviewsSection() {
             )}
 
             <div className="review-footer">
-              <span className="helpful-count">👍 {review.helpful} personas encontraron esto útil</span>
+              <span className="helpful-count"><ThumbsUp size={16} /> {review.helpful} personas encontraron esto útil</span>
               <button
                 className={`btn-helpful ${helpful[review.id] ? 'voted' : ''}`}
                 onClick={() => !helpful[review.id] && handleHelpful(review.id)}

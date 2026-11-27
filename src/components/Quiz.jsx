@@ -1,4 +1,25 @@
 import { useState } from 'react';
+import {
+  Award, BarChart3, BookOpen, CheckCircle2, CircleDollarSign, Clock3,
+  Dices, Drum, Guitar, Headphones, Heart, Home, Lightbulb,
+  Music, Piano, RotateCcw, Sparkles, Target, Trophy, Users, Waves,
+} from 'lucide-react';
+import AppIcon from './AppIcon.jsx';
+
+function QuizIcon({ emoji, size = 24 }) {
+  const iconProps = { size, strokeWidth: 1.8, 'aria-hidden': true };
+  const iconMap = {
+    '🎵': Music, '🎸': Guitar, '🎹': Piano, '🥁': Drum, '🎧': Headphones,
+    '🎼': Music, '✨': Sparkles, '💃': Users, '🤷': Users, '📊': BarChart3,
+    '🐣': Sparkles, '🌱': Heart, '🌿': Waves, '🌳': Award, '💰': CircleDollarSign,
+    '💵': CircleDollarSign, '💸': CircleDollarSign, '💎': Award, '👑': Trophy,
+    '🏠': Home, '🏡': Home, '👥': Users, '🎤': Headphones, '🏫': BookOpen,
+    '⚡': Lightbulb, '☀️': Lightbulb, '🔥': Lightbulb, '🎷': Waves,
+    '🎻': Waves, '🎲': Dices, '⏰': Clock3, '🌅': Sparkles, '🤘': Guitar,
+  };
+  const Icon = iconMap[emoji] || Target;
+  return <Icon {...iconProps} />;
+}
 
 const questions = [
   {
@@ -276,14 +297,14 @@ export default function Quiz({ onNavigate }) {
   return (
     <section className="quiz-section">
       <div className="section-header">
-        <h2 className="section-title">🎯 ¿Qué instrumento es para ti?</h2>
+        <h2 className="section-title"><Target size={24} /> ¿Qué instrumento es para ti?</h2>
         <p className="section-subtitle">Responde 7 preguntas y descubre tu instrumento ideal</p>
       </div>
 
       {/* Intro */}
       {step === 0 && (
         <div className="quiz-intro">
-          <div className="quiz-intro-emoji">🎵</div>
+          <div className="quiz-intro-emoji"><Music size={64} /></div>
           <h3>Encuentra tu instrumento perfecto</h3>
           <p>
             Con solo 7 preguntas, nuestro algoritmo analizará tu perfil musical, nivel, presupuesto y objetivos
@@ -291,11 +312,11 @@ export default function Quiz({ onNavigate }) {
           </p>
           <div className="quiz-features">
             {['7 preguntas rápidas', 'Resultado personalizado', 'Recomendaciones de productos', 'Pasos para comenzar'].map(f => (
-              <div key={f} className="quiz-feature">✅ {f}</div>
+              <div key={f} className="quiz-feature"><CheckCircle2 size={18} /> {f}</div>
             ))}
           </div>
           <button className="btn-primary large" onClick={handleStart}>
-            🎯 Comenzar el Quiz
+            <Target size={18} /> Comenzar el Quiz
           </button>
         </div>
       )}
@@ -312,7 +333,7 @@ export default function Quiz({ onNavigate }) {
           </div>
 
           <div className="question-card">
-            <div className="question-emoji">{questions[step - 1].emoji}</div>
+            <div className="question-emoji"><QuizIcon emoji={questions[step - 1].emoji} size={36} /></div>
             <h3 className="question-text">{questions[step - 1].question}</h3>
 
             <div className="options-grid">
@@ -322,7 +343,7 @@ export default function Quiz({ onNavigate }) {
                   className={`option-btn ${selected === opt.value ? 'selected' : ''}`}
                   onClick={() => handleSelect(opt.value)}
                 >
-                  <span className="option-emoji">{opt.emoji}</span>
+                  <span className="option-emoji"><QuizIcon emoji={opt.emoji} size={28} /></span>
                   <span className="option-label">{opt.label}</span>
                 </button>
               ))}
@@ -337,7 +358,7 @@ export default function Quiz({ onNavigate }) {
                 onClick={handleNext}
                 disabled={!selected}
               >
-                {step === questions.length ? '🎯 Ver mi resultado' : 'Siguiente →'}
+                {step === questions.length ? <><Target size={16} /> Ver mi resultado</> : 'Siguiente →'}
               </button>
             </div>
           </div>
@@ -348,15 +369,15 @@ export default function Quiz({ onNavigate }) {
       {step === 8 && result && (
         <div className="quiz-result">
           <div className="result-header" style={{ background: `linear-gradient(135deg, ${result.color}22, ${result.color}11)`, borderColor: result.color }}>
-            <div className="result-emoji">{result.emoji}</div>
-            <div className="result-crown">🎉 Tu instrumento ideal es:</div>
+            <div className="result-emoji"><AppIcon category={result.name} size={58} /></div>
+            <div className="result-crown"><Trophy size={16} /> Tu instrumento ideal es:</div>
             <h3 className="result-name" style={{ color: result.color }}>{result.name}</h3>
           </div>
 
           <p className="result-description">{result.description}</p>
 
           <div className="result-section">
-            <h4>🎸 Productos recomendados para ti:</h4>
+            <h4><Guitar size={18} /> Productos recomendados para ti:</h4>
             <div className="suggestion-chips">
               {result.suggestions.map(s => (
                 <span key={s} className="suggestion-chip" style={{ borderColor: result.color }}>
@@ -367,7 +388,7 @@ export default function Quiz({ onNavigate }) {
           </div>
 
           <div className="result-section">
-            <h4>📚 Próximos pasos:</h4>
+            <h4><BookOpen size={18} /> Próximos pasos:</h4>
             <ol className="next-steps">
               {result.nextSteps.map((step, i) => (
                 <li key={i}>{step}</li>
@@ -380,10 +401,10 @@ export default function Quiz({ onNavigate }) {
               className="btn-primary"
               onClick={() => onNavigate('catalog')}
             >
-              🎸 Ver {result.name} en el catálogo
+              <Guitar size={16} /> Ver {result.name} en el catálogo
             </button>
             <button className="btn-secondary" onClick={handleRestart}>
-              🔄 Repetir Quiz
+              <RotateCcw size={16} /> Repetir Quiz
             </button>
           </div>
         </div>

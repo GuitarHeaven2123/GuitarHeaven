@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { X } from 'lucide-react';
+import AppIcon from './AppIcon.jsx';
 
 function StarRating({ rating }) {
   return (
@@ -38,7 +40,7 @@ export default function ProductCard({ product, onAddToCart }) {
         )}
 
         <div className="product-emoji">
-          {getCategoryEmoji(product.category)}
+          <AppIcon category={product.category} size={42} />
         </div>
 
         <div className="product-info">
@@ -78,8 +80,8 @@ export default function ProductCard({ product, onAddToCart }) {
       {showDetail && (
         <div className="modal-overlay" onClick={() => setShowDetail(false)}>
           <div className="modal-card" onClick={e => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setShowDetail(false)}>✕</button>
-            <div className="modal-emoji">{getCategoryEmoji(product.category)}</div>
+            <button className="modal-close" onClick={() => setShowDetail(false)} aria-label="Cerrar"><X size={18} /></button>
+            <div className="modal-emoji"><AppIcon category={product.category} size={58} /></div>
             <span className="product-category">{product.category}</span>
             <h2>{product.name}</h2>
             <p className="modal-brand"><strong>Marca:</strong> {product.brand}</p>
@@ -111,75 +113,3 @@ export default function ProductCard({ product, onAddToCart }) {
   );
 }
 
-function getCategoryEmoji(category) {
-  const map = {
-    'Guitarra Eléctrica': '🎸',
-    'Guitarra Acústica': '🪕',
-    'Guitarra Clásica': '🎸',
-    'Bajo Eléctrico': '🎸',
-    'Piano Digital': '🎹',
-    'Teclado': '🎹',
-    'Sintetizador': '🎹',
-    'Piano Escénico': '🎹',
-    'Controlador MIDI': '🎹',
-    'Batería Acústica': '🥁',
-    'Batería Electrónica': '🥁',
-    'Platillos': '🥁',
-    'Percusión': '🥁',
-    'Percusión Electrónica': '🥁',
-    'Saxofón': '🎷',
-    'Trompeta': '🎺',
-    'Flauta': '🪈',
-    'Flauta Dulce': '🪈',
-    'Flauta de Pan': '🪈',
-    'Clarinete': '🎵',
-    'Trombón': '🎺',
-    'Tuba': '🎺',
-    'Armónica': '🎵',
-    'Violín': '🎻',
-    'Cello': '🎻',
-    'Contrabajo': '🎻',
-    'Ukulele': '🪕',
-    'Mandolina': '🪕',
-    'Banjo': '🪕',
-    'Amplificador Guitarra': '🔊',
-    'Amplificador Bajo': '🔊',
-    'Cuerdas Guitarra Eléctrica': '〰️',
-    'Cuerdas Guitarra Acústica': '〰️',
-    'Cuerdas Guitarra Clásica': '〰️',
-    'Cuerdas Bajo': '〰️',
-    'Pedal Distorsión': '🎚️',
-    'Pedal Overdrive': '🎚️',
-    'Pedal Modulación': '🎚️',
-    'Pedal Delay': '🎚️',
-    'Pedal Reverb': '🎚️',
-    'Pedal Wah': '🎚️',
-    'Pedal Afinador': '🎚️',
-    'Pedalera Multifx': '🎚️',
-    'Micrófono': '🎤',
-    'Interfaz de Audio': '💻',
-    'Audífonos': '🎧',
-    'Grabadora': '🎙️',
-    'Estuche': '💼',
-    'Soporte': '🗂️',
-    'Cable': '🔌',
-    'Púas': '🪩',
-    'Correa': '🔗',
-    'Afinador': '🎵',
-    'Cejilla': '🎸',
-    'Pedalboard': '🎚️',
-    'Kalimba': '🎵',
-    'Theremin': '🌊',
-    'Controlador DJ': '🎧',
-    'Órgano': '🎹',
-    'Melodica': '🎵',
-    'Arpa': '🪗',
-    'Marimba': '🥁',
-    'Xilófono': '🥁',
-    'Tabla': '🥁',
-    'Sitar': '🪕',
-    'Sintetizador Portátil': '🎹',
-    'Sampler': '🎧',
-  };
-  return map[category] || '🎵';
-}
